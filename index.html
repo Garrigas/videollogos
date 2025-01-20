@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
     <title>Videollogos</title>
 </head>
 <body>
@@ -15,5 +14,21 @@
             <button id="addbutton">ADD</button>
         </form>
     </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Agregar Juego</h2>
+            <form id="modal-form">
+                <label for="game-name">Nombre del juego:</label>
+                <input type="text" id="game-name" name="game-name" required>
+    
+                <label for="game-genre">Género del juego:</label>
+                <input type="text" id="game-genre" name="game-genre" required>
+                
+                <button type="submit" id="save-game">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
