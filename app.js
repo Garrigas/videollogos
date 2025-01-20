@@ -62,6 +62,6 @@ modalForm.addEventListener("submit", function (event) {
     // Cerrar el modal
     modal.style.display = 'none';
 
-    // Mostrar en consola (puedes reemplazar esto por lógica para mostrar en pantalla)
+    // Mostrar en consola
     console.log(juegos);
 });
