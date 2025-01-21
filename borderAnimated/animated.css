@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.35s linear;
+    font-family: "poppins", sans-serif;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    background-color: #111;
+}
+
+.card{
+    --color: #ff88a6;
+    --border-size: 1rem;
+    --bg-color: #252525;
+    position: relative;
+    background-color: var(--bg-color);
+    width: 200px;
+    margin: 2rem;
+    border-radius: var(--border-size);
+    color: white;
+}
