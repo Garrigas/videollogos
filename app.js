@@ -62,6 +62,22 @@ modalForm.addEventListener("submit", function (event) {
     // Cerrar el modal
     modal.style.display = 'none';
 
-    // Mostrar en consola (puedes reemplazar esto por lógica para mostrar en pantalla)
-    console.log(juegos);
+    for (let juego of juegos) {
+        const tarjeta = document.createElement('div'); // Crea un nuevo div para la tarjeta
+        tarjeta.classList.add('tarjeta'); // Clase para estilos
+        
+        const titulo = document.createElement('h2'); // Nuevo h2 para el nombre del juego
+        titulo.textContent = juego.name; // Asigna el nombre del juego
+        tarjeta.appendChild(titulo); // Añade el título a la tarjeta
+    
+        const genero = document.createElement('p'); // Nuevo p para el género del juego
+        genero.textContent = `Género: ${juego.genre}`;
+        tarjeta.appendChild(genero); // Añade el género a la tarjeta
+    
+        document.getElementById('contenedor-juegos').appendChild(tarjeta); // Añade la tarjeta al DOM
+    }
+    // Después de agregar el juego al array
+    const nuevoJuego = juegos[juegos.length - 1]; // Último juego agregado
+    crearTarjeta(nuevoJuego); // Llama a una función para crear y mostrar la tarjeta
+
 });
