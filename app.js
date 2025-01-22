@@ -16,7 +16,9 @@
  * Una vez que el usuario a añadido el juego este aparecera en pantalla automaticamente con
  * la imagen que el usuario a subido.
  * Una opcion para buscar el juego por nombre y tambien un menu para filtrar por año,  por genero, y si es favarito
- * 
+ * Uno de los diseños que se podria usar esta en la carpeta de borderAnimated que 
+ * lo he sacado del siguiente video: https://youtu.be/i2qjId2QbJw?si=zjDAsL_ohbBYuVXJ
+ * o tambien el estilo de este video: https://youtu.be/RZ3tYD4TM0M?si=-MvttXaYvpEPZddi
  */
 
 const form = document.querySelector('form');
