@@ -26,4 +26,38 @@ section{
     margin: 2rem;
     border-radius: var(--border-size);
     color: white;
+    display: grid;
+    place-content: center;
+    padding: 3rem 2rem;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.card::before,
+.card::after{
+    content: "";
+    position: absolute;
+}
+
+.card::before{
+    width: 200%;
+    height: 200%;
+    background-image: conic-gradient(var(--color) 0deg,
+        transparent 60deg,
+        transparent 180deg,
+        var(--color) 180deg,
+        transparent 240deg);
+    inset: -50%;
+    z-index: -2;
+    animation: border 8s linear infinite;
+}
+
+@keyframes border{
+    to{
+        transform: rotateZ(-360deg);
+    }
+}
+
+.card::after{
+    --inset: 0.25rem;
 }
