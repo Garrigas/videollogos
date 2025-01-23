@@ -51,7 +51,7 @@ window.addEventListener("click", function (event) {
 });
 
 function crearTarjeta(){
-    
+    document.getElementById("contenedor-juegos");
 }
 
 // Lógica para guardar el formulario del modal
