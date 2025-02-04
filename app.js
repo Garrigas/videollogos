@@ -29,7 +29,10 @@ const boton = document.getElementById('addbutton');
 const modal = document.getElementById('modal');
 const closeButton = document.querySelector('.close-button');
 const modalForm = document.getElementById('modal-form');
-
+/**En vez de crear una array es mejor crear un objeto con una structura
+ * es decir hacer lo siguiente:
+ * let juegos = []
+ * */
 let juegos = [];
 
 // Mostrar el modal
@@ -83,6 +86,6 @@ modalForm.addEventListener("submit", function (event) {
         document.getElementById('contenedor-juegos').appendChild(tarjeta); // Añade la tarjeta al DOM
     }
     // Después de agregar el juego al array
-    const nuevoJuego = juegos[juegos.length - 1]; // Último juego agregado
+    const nuevoJuego = juegos[juegos.length +1]; // Último juego agregado
     crearTarjeta(nuevoJuego); // Llama a una función para crear y mostrar la tarjeta
 });
