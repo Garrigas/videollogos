@@ -84,5 +84,5 @@ modalForm.addEventListener("submit", function (event) {
     }
     // Después de agregar el juego al array
     const nuevoJuego = juegos[juegos.length - 1]; // Último juego agregado
-    //crearTarjeta(nuevoJuego); // Llama a una función para crear y mostrar la tarjeta
+    crearTarjeta(nuevoJuego); // Llama a una función para crear y mostrar la tarjeta
 });
