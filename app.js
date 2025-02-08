@@ -29,11 +29,86 @@ const boton = document.getElementById('addbutton');
 const modal = document.getElementById('modal');
 const closeButton = document.querySelector('.close-button');
 const modalForm = document.getElementById('modal-form');
-/**En vez de crear una array es mejor crear un objeto con una structura
- * es decir hacer lo siguiente:
- * let juegos = []
- * */
+
+// Constructor para los juegos
+function Videojuego(
+    nombre, 
+    genero, 
+    calificacion, 
+    favorito, 
+    horas, 
+    fechaInicio, 
+    fechaFin, 
+    platinado, 
+    fechaPlatinado, 
+    imagen
+) {
+    this.nombre = nombre;
+    this.genero = genero;
+    this.calificacion = calificacion;
+    this.favorito = favorito;
+    this.horas = horas;
+    this.fechaInicio = fechaInicio;
+    this.fechaFin = fechaFin;
+    this.platinado = platinado;
+    this.fechaPlatinado = fechaPlatinado;
+    this.imagen = imagen;
+}
+
 let juegos = [];
+
+// Función mejorada para crear tarjetas
+function crearTarjeta(juego) {
+    const contenedor = document.getElementById("contenedor-juegos");
+    
+    const tarjeta = document.createElement('div');
+    tarjeta.className = 'tarjeta';
+    
+    const contenido = `
+        <div class="imagen-container">
+            <img src="${juego.imagen}" alt="${juego.nombre}">
+        </div>
+        <h2>${juego.nombre}</h2>
+        <p>Género: ${juego.genero}</p>
+        <p>Horas: ${juego.horas}</p>
+        <div class="calificacion">${'★'.repeat(juego.calificacion)}</div>
+        ${juego.favorito ? '<div class="favorito">❤️ Favorito</div>' : ''}
+        <p>Platinado: ${juego.platinado ? '✅ ' + juego.fechaPlatinado : '❌'}</p>
+        <p>Jugado entre: ${juego.fechaInicio} - ${juego.fechaFin}</p>
+    `;
+    
+    tarjeta.innerHTML = contenido;
+    contenedor.appendChild(tarjeta);
+}
+
+// Manejo del formulario mejorado
+modalForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    
+    // Obtener todos los valores del formulario
+    const nuevoJuego = new Videojuego(
+        document.getElementById('game-name').value,
+        document.getElementById('game-genre').value,
+        document.querySelector('input[name="calificacion"]:checked').value,
+        document.getElementById('favorito').checked,
+        document.getElementById('horas').value,
+        document.getElementById('fecha-inicio').value,
+        document.getElementById('fecha-fin').value,
+        document.getElementById('platinado').checked,
+        document.getElementById('platinado').checked ? document.getElementById('fecha-platinado').value : null,
+        // Para la imagen necesitarías manejar FileReader para previsualización
+        'placeholder.jpg' // Temporal, implementar carga de imagen
+    );
+    
+    juegos.push(nuevoJuego);
+    crearTarjeta(nuevoJuego); // Crear solo la nueva tarjeta
+    modal.style.display = 'none';
+    modalForm.reset();
+});
+
+
+
+
 
 // Mostrar el modal
 boton.addEventListener("click", function (event) {
@@ -53,39 +128,3 @@ window.addEventListener("click", function (event) {
     }
 });
 
-function crearTarjeta(){
-    document.getElementById("contenedor-juegos");
-}
-
-// Lógica para guardar el formulario del modal
-modalForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    // Obtener datos del formulario
-    const gameName = document.getElementById('game-name').value;
-    const gameGenre = document.getElementById('game-genre').value;
-
-    // Agregar el juego a la lista
-    juegos.push({ name: gameName, genre: gameGenre });
-
-    // Cerrar el modal
-    modal.style.display = 'none';
-
-    for (let juego of juegos) {
-        const tarjeta = document.createElement('div'); // Crea un nuevo div para la tarjeta
-        tarjeta.classList.add('tarjeta'); // Clase para estilos
-        
-        const titulo = document.createElement('h2'); // Nuevo h2 para el nombre del juego
-        titulo.textContent = juego.name; // Asigna el nombre del juego
-        tarjeta.appendChild(titulo); // Añade el título a la tarjeta
-    
-        const genero = document.createElement('p'); // Nuevo p para el género del juego
-        genero.textContent = `Género: ${juego.genre}`;
-        tarjeta.appendChild(genero); // Añade el género a la tarjeta
-    
-        document.getElementById('contenedor-juegos').appendChild(tarjeta); // Añade la tarjeta al DOM
-    }
-    // Después de agregar el juego al array
-    const nuevoJuego = juegos[juegos.length +1]; // Último juego agregado
-    crearTarjeta(nuevoJuego); // Llama a una función para crear y mostrar la tarjeta
-});

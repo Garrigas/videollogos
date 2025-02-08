@@ -1,36 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Videollogos</title>
+    <title>Tu Biblioteca de Juegos</title>
 </head>
 <body>
-    <h1>Tus VideoJuegos</h1>
+    <h1>Tus Videojuegos</h1>
+    
     <div class="wrapper">
-        <form>
-            <input type="text" placeholder="What game do yo want to find?" autocomplete="off" name="" id="form-input">
-            <button id="addbutton">ADD</button>
+        <!-- Barra de búsqueda -->
+        <form id="search-form">
+            <input type="text" placeholder="Buscar juego..." id="search-input">
+            <button type="button" id="addbutton">Añadir Juego</button>
         </form>
+        
+        <!-- Filtros -->
+        <div class="filtros">
+            <select id="filtro-genero">
+                <option value="">Todos los géneros</option>
+                <option>RPG</option>
+                <option>FPS</option>
+                <option>Aventura</option>
+            </select>
+            
+            <select id="filtro-ano">
+                <option value="">Todos los años</option>
+                <option>2024</option>
+                <option>2023</option>
+            </select>
+            
+            <label>
+                <input type="checkbox" id="filtro-favoritos"> Mostrar solo favoritos
+            </label>
+        </div>
     </div>
+
+    <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h2>Agregar Juego</h2>
             <form id="modal-form">
-                <label for="game-name">Nombre del juego:</label>
-                <input type="text" id="game-name" name="game-name" required>
-                <label for="game-genre">Género del juego:</label>
-                <input type="text" id="game-genre" name="game-genre" required>
-                
-                <button type="submit" id="save-game">Guardar</button>
+                <!-- Sección izquierda (Datos) -->
+                <div class="modal-column">
+                    <div class="form-group">
+                        <label for="game-name">Nombre:</label>
+                        <input type="text" id="game-name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="game-genre">Género:</label>
+                        <select id="game-genre" required>
+                            <option value="">Selecciona...</option>
+                            <option>RPG</option>
+                            <option>FPS</option>
+                            <option>Aventura</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Calificación:</label>
+                        <div class="estrellas">
+                            <!-- Estrellas de rating -->
+                            <input type="radio" name="rating" id="star5" value="5"><label for="star5">★</label>
+                            <input type="radio" name="rating" id="star4" value="4"><label for="star4">★</label>
+                            <input type="radio" name="rating" id="star3" value="3"><label for="star3">★</label>
+                            <input type="radio" name="rating" id="star2" value="2"><label for="star2">★</label>
+                            <input type="radio" name="rating" id="star1" value="1"><label for="star1">★</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="horas">Horas jugadas:</label>
+                        <input type="number" id="horas" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fecha-inicio">Fecha inicio:</label>
+                        <input type="date" id="fecha-inicio" required>
+                    </div>
+                </div>
+
+                <!-- Sección derecha (Imagen y extras) -->
+                <div class="modal-column">
+                    <div class="form-group">
+                        <label for="imagen-juego">Portada:</label>
+                        <input type="file" id="imagen-juego" accept="image/*">
+                        <div id="preview-container"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="favorito"> Juego favorito
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="platinado"> Platinado
+                        </label>
+                        <input type="date" id="fecha-platinado" style="display: none;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fecha-fin">Fecha finalización:</label>
+                        <input type="date" id="fecha-fin" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-guardar">Guardar Juego</button>
             </form>
         </div>
     </div>
-    <div id="contenedor-juegos">
-        
-    </div>
+
+    <!-- Contenedor de juegos -->
+    <div id="contenedor-juegos" class="grid-container"></div>
+
     <script src="app.js"></script>
 </body>
 </html>
