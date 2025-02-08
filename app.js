@@ -81,7 +81,7 @@ function crearTarjeta(juego) {
     contenedor.appendChild(tarjeta);
 }
 
-// Manejo del formulario mejorado
+/* Manejo del formulario mejorado
 modalForm.addEventListener("submit", function (event) {
     event.preventDefault();
     
@@ -104,7 +104,7 @@ modalForm.addEventListener("submit", function (event) {
     crearTarjeta(nuevoJuego); // Crear solo la nueva tarjeta
     modal.style.display = 'none';
     modalForm.reset();
-});
+});*/
 
 
 
@@ -126,5 +126,84 @@ window.addEventListener("click", function (event) {
     if (event.target === modal) {
         modal.style.display = 'none';
     }
+});
+
+
+
+// 1. Selección de nuevos elementos del DOM
+const searchInput = document.getElementById('search-input');
+const filtroGenero = document.getElementById('filtro-genero');
+const filtroAno = document.getElementById('filtro-ano');
+const filtroFavoritos = document.getElementById('filtro-favoritos');
+const imagenJuego = document.getElementById('imagen-juego');
+let imagenPreview = '';
+
+// 2. Manejo de la imagen (colocar ANTES del evento submit del formulario)
+imagenJuego.addEventListener('change', function(e) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        imagenPreview = reader.result;
+        document.getElementById('preview-container').innerHTML = `<img src="${imagenPreview}" alt="Previsualización">`;
+    }
+    reader.readAsDataURL(e.target.files[0]);
+});
+
+// 3. Mostrar/ocultar fecha platinado (colocar después de las variables anteriores)
+document.getElementById('platinado').addEventListener('change', function() {
+    document.getElementById('fecha-platinado').style.display = this.checked ? 'block' : 'none';
+});
+
+// 4. Función de renderizado (después del constructor y antes de los event listeners)
+function renderJuegos() {
+    const contenedor = document.getElementById('contenedor-juegos');
+    contenedor.innerHTML = '';
+    
+    const juegosFiltrados = juegos.filter(juego => {
+        const matchNombre = juego.nombre.toLowerCase().includes(searchInput.value.toLowerCase());
+        const matchGenero = filtroGenero.value ? juego.genero === filtroGenero.value : true;
+        const matchAno = filtroAno.value ? new Date(juego.fechaFin).getFullYear() == filtroAno.value : true;
+        const matchFavoritos = filtroFavoritos.checked ? juego.favorito : true;
+        
+        return matchNombre && matchGenero && matchAno && matchFavoritos;
+    });
+    
+    juegosFiltrados.forEach(juego => crearTarjeta(juego));
+}
+
+// 5. Event listeners para filtros (colocar al final, antes del cierre del script)
+searchInput.addEventListener('input', renderJuegos);
+filtroGenero.addEventListener('change', renderJuegos);
+filtroAno.addEventListener('change', renderJuegos);
+filtroFavoritos.addEventListener('change', renderJuegos);
+
+// 6. Reemplazar el evento submit existente por esta versión actualizada
+modalForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    
+    const rating = document.querySelector('input[name="rating"]:checked');
+    if (!rating) {
+        alert('Por favor selecciona una calificación');
+        return;
+    }
+
+    const nuevoJuego = new Videojuego(
+        document.getElementById('game-name').value,
+        document.getElementById('game-genre').value,
+        parseInt(rating.value),
+        document.getElementById('favorito').checked,
+        parseFloat(document.getElementById('horas').value),
+        document.getElementById('fecha-inicio').value,
+        document.getElementById('fecha-fin').value,
+        document.getElementById('platinado').checked,
+        document.getElementById('platinado').checked ? document.getElementById('fecha-platinado').value : null,
+        imagenPreview || 'placeholder.jpg'
+    );
+    
+    juegos.push(nuevoJuego);
+    modal.style.display = 'none';
+    modalForm.reset();
+    document.getElementById('preview-container').innerHTML = '';
+    imagenPreview = ''; // Resetear la imagen
+    renderJuegos(); // Actualizar la visualización
 });
 
