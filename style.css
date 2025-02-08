@@ -47,7 +47,7 @@ h1{
     gap: 10px;
 }
 
-#form-input{
+#search-input{
     box-sizing: border-box;
     padding: 12px 20px;
     width: 100%;
@@ -59,7 +59,7 @@ h1{
     caret-color: var(--accent-color);
 }
 
-#form-input:focus{
+#search-input:focus{
     outline: none;
 }
 
@@ -132,4 +132,157 @@ form{
 
 .close-button:hover {
     color: var(--secundary-color);
+}
+/* ... (todo lo que tienes actualmente se mantiene igual) ... */
+
+/* Nuevos estilos agregados */
+.modal-content {
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%; /* Ajustado para mejor responsive */
+    max-width: 600px; /* Un poco más ancho para 2 columnas */
+    color: var(--text-color);
+    position: relative;
+}
+
+.modal-column {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--background);
+    border: 1px solid var(--secundary-color);
+    border-radius: 4px;
+    color: var(--text-color);
+}
+
+.estrellas {
+    display: flex;
+    gap: 0.5rem;
+    direction: rtl; /* Para que las estrellas se llenen de derecha a izquierda */
+}
+
+.estrellas input[type="radio"] {
+    display: none;
+}
+
+.estrellas label {
+    font-size: 1.5rem;
+    color: var(--secundary-color);
+    cursor: pointer;
+}
+
+.estrellas input:checked ~ label {
+    color: var(--accent-color);
+}
+
+.estrellas label:hover,
+.estrellas label:hover ~ label {
+    color: var(--accent-color);
+}
+
+#preview-container {
+    margin-top: 1rem;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--background);
+    border: 2px dashed var(--secundary-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-guardar {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-color);
+    border: none;
+    border-radius: 1000px;
+    color: var(--background);
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.grid-container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.tarjeta {
+    background: var(--primary-color);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid var(--secundary-color);
+}
+
+.tarjeta .imagen-container {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favorito {
+    color: #ff4081;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.calificacion {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-column {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+}
+
+@media (max-width: 500px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
 }
