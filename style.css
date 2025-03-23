@@ -277,7 +277,8 @@ form{
     }
     
     .modal-content {
-        width: 95%;
+        width: 60%;
+        height: 49%;
     }
 }
 
